@@ -19,7 +19,7 @@ if __name__ == "__main__":
     numOfPlayers = 2
     CONNECTION_LIST = []
     RECV_BUFFER = 2048
-    HOST = ''
+    HOST = '120.0.0.1'
     PORT = 5555
 
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

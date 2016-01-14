@@ -57,7 +57,7 @@ class ButtonC:
 if __name__ == "__main__":
     
     #Currently hardcoded to Binam's ip address, where server.py is run)
-    host = '130.215.225.166'
+    host = '130.215.225.166' #WPI Ip
     port = 5555
 
     #Created socket variable
