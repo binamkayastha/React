@@ -2,7 +2,7 @@ import sys, pygame, socket, select, string, sys
 from math import sqrt
 pygame.init()
 
-#Crerating GUI Class for Button
+#Generates a Rectangular GUI Class for Button
 class Button:
     def __init__(self, x, y, width, height): #Constructor
         self.x = x
@@ -11,24 +11,27 @@ class Button:
         self.height = height
         self.draw()
 
-    def draw(self): #Draws the button
+    #Draws the button
+    def draw(self):
         pygame.draw.rect(screen, (200, 200, 200), [self.x, self.y, self.width, self.height], 0)
 
-    def drawcolor(self, color): #Draws button with specified color
+    #Draws button with specified color
+    def drawcolor(self, color):
         pygame.draw.rect(screen, color, [self.x, self.y, self.width, self.height], 0)
 
-    def mouseInside(self, mousex, mousey): #Checks whether the given mousex and mousey are inside the button
+    #Checks whether the given mousex and mousey are inside the button
+    def mouseInside(self, mousex, mousey): 
         if (self.x < mousex and mousex < (self.x + self.width) and self.y < mousey and mousey < (self.y + self.height)):
             return True;
         else:
             return False;
-    
+
     def isClicked(self, mousex, mousey, ispressed, s):
         if self.mouseInside(mousex, mousey) and ispressed:
             print("You acted")
             s.send(str.encode("Enemy acted"))
 
-
+#Generates a Circular GUI Class for Button
 class ButtonC:
     def __init__(self, name, x, y, r): #Constructor
         self.name = name
@@ -57,20 +60,22 @@ class ButtonC:
 if __name__ == "__main__":
     
     #Currently hardcoded to Binam's ip address, where server.py is run)
-    host = '130.215.225.166' #WPI Ip
+    #host = '130.215.225.166' #WPI Ip
+    host = ''
     port = 5555
 
-    #Created socket variable
+    #Created socket variable with default values.
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    #A 2 second timeout for blocking socket operations.
     s.settimeout(2)
-    
+
     try:
-        s.connect((host, port)) #Connect to host (really should to try/except, but too lazy)
+        s.connect((host, port)) #Connect to host
     except:
         print("Unable to connect")
         sys.exit()
 
-    print("Connected to game. Waiting for server's okay")
+    print("Connected to game.")
     #Now that connection is up, run the screensetup
 
 
@@ -113,12 +118,15 @@ if __name__ == "__main__":
     while 1:
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
+            #Add closing connectin here.
 
         socket_list = [sys.stdin, s]
         read_sockets, write_sockets, error_sockets = select.select(socket_list, [], [])
         for sock in read_sockets:
+            #If data was sent.
             if sock == s:
                 data = sock.recv(2048)
+                #If no data was send ("Empty string")
                 if not data:
                     print("\nDisconnected from game")
                     sys.exit()
@@ -130,7 +138,9 @@ if __name__ == "__main__":
                 #Set the current variables of the mouse
                 mousex, mousey = pygame.mouse.get_pos()
                 pressed1= pygame.mouse.get_pressed()[0]
-                if pressed1: #Makes ispressed an ONMOUSEDOWN/ONMOUSEUP event
+
+                #Makes ispressed equal to true once every click.
+                if pressed1: 
                     if lastpressed:
                         ispressed = False
                     else:
