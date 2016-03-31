@@ -1,7 +1,7 @@
 import sys, pygame, socket, select, string, sys
 from math import sqrt
 pygame.init()
-
+'''
 #Generates a Rectangular GUI Class for Button
 class Button:
     def __init__(self, x, y, width, height): #Constructor
@@ -54,7 +54,7 @@ class ButtonC:
         if self.mouseInside(mousex, mousey) and ispressed:
             print("You " + self.name)
             s.send(str.encode(self.name))
-
+'''
 
 
 if __name__ == "__main__":
@@ -78,7 +78,7 @@ if __name__ == "__main__":
     print("Connected to game.")
     #Now that connection is up, run the screensetup
 
-
+'''
     #Set basic parts of pygame screen up
     size = width, height = 1000, 1000
     black = 0, 0, 0
@@ -92,10 +92,10 @@ if __name__ == "__main__":
     buttonact = Button(0, 0, 200, 100)
     buttonreact = Button (width-200, 0, 200, 100)
     '''
-    btnPunch = Button(40, 625, 200, 150)
-    btnGrab = Button(40, 750, 200, 150) 
-    btnDash = Button(280, 625, 200, 150)
-    btnCharge = Button(280, 750, 200, 150)
+    #btnPunch = Button(40, 625, 200, 150)
+    #btnGrab = Button(40, 750, 200, 150) 
+    #btnDash = Button(280, 625, 200, 150)
+    #btnCharge = Button(280, 750, 200, 150)
     '''
     btnPunch = ButtonC("punch", 115, 625, 55)
     btnGrab = ButtonC("grab", 115, 750, 55) 
@@ -103,7 +103,7 @@ if __name__ == "__main__":
     btnCharge = ButtonC("charge", 355, 750, 55)
     btnBlock = ButtonC("block", 480, 625, 55)
     btnDodge = ButtonC("dodge", 480, 750, 55)
-
+'''
 
     #Draw the buttons
     #buttonact.draw()
@@ -149,6 +149,7 @@ if __name__ == "__main__":
                 else:
                     ispressed = False
                     lastpressed = False
+'''
 
                 #Checks whether the buttons are being pressed
                 buttonact.isClicked(mousex, mousey, ispressed, s)
@@ -162,3 +163,4 @@ if __name__ == "__main__":
 
                 #Display the current status to the game
                 pygame.display.update()
+'''
